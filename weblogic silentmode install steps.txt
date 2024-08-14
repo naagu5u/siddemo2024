@@ -1,0 +1,130 @@
+java home set command in .bash_profile
+
+export JAVA_HOME="path that you found"
+export PATH=$JAVA_HOME/bin:$PATH
+
+
+if u copied all prerequiste packge scripts into prereq.sh then run below command otherwise run all packages manually.
+1.run prereq.sh file with root access 
+2.then create oraInst.loc file with required details like below ,
+[oracle@uzsrvflexuatapp softwares]$ cat oraInst.loc
+inventory_loc=/home/oracle/oraInventory_wl14110
+inst_group=oinstall
+
+
+3.then execute weblogic jar with response file with oracle access
+
+java -jar fmw_14.1.1.0.0_wls.jar -silent -responseFile /u01/softwares/wl14110.rsp -invPtrLoc /u01/softwares/oraInst.loc
+
+wl12214.rsp
+
+java -jar fmw_12.2.1.4.0_infrastructure.jar -silent -responseFile /u01/softwares/wl12214.rsp -invPtrLoc /u01/softwares/oraInst.loc
+
+
+systemctl restart sshd
+
+================================================================
+
+12c response file
+
+wl12214.rsp:
+
+[ENGINE]
+Response File Version=1.0.0.0.0
+DECLINE_AUTO_UPDATES=true
+MOS_USERNAME=
+MOS_PASSWORD=<SECURE VALUE>
+AUTO_UPDATES_LOCATION=
+SOFTWARE_UPDATES_PROXY_SERVER=
+SOFTWARE_UPDATES_PROXY_PORT=
+SOFTWARE_UPDATES_PROXY_USER=
+SOFTWARE_UPDATES_PROXY_PASSWORD=<SECURE VALUE>
+ORACLE_HOME=/u01/app/Oracle/Middleware
+FEDERATED_ORACLE_HOMES=
+INSTALL_TYPE=WebLogic Server
+
+========================================================
+14c ressponse file Model:
+wl14110.rsp:
+
+[ENGINE]
+Response File Version=1.0.0.0.0
+[GENERIC]
+ORACLE_HOME=/u01/oracle/ofsaa/Middleware/
+INSTALL_TYPE=Fusion Middleware Infrastructure
+MYORACLESUPPORT_USERNAME=
+MYORACLESUPPORT_PASSWORD=<SECURE VALUE>
+DECLINE_SECURITY_UPDATES=true
+SECURITY_UPDATES_VIA_MYORACLESUPPORT=false
+PROXY_HOST=
+PROXY_PORT=
+PROXY_USER=
+PROXY_PWD=<SECURE VALUE>
+COLLECTOR_SUPPORTHUB_URL=
+
+
+=================================================================================
+weblogic installation steps:
+=========================
+
+1.login into the server
+2.download java and weblogicsoftwares
+3.create response file and oraInst.loc files and run the weblogic install silent mode script from the weblogic package placed location.
+
+for example:
+[oracle@uzsrvflexuatapp softwares]$ cat oraInst.loc
+inventory_loc=/home/oracle/oraInventory_wl14110
+inst_group=oinstall
+=============
+
+12c response file:
+wl12214.rsp:
+
+[ENGINE]
+Response File Version=1.0.0.0.0
+DECLINE_AUTO_UPDATES=true
+MOS_USERNAME=
+MOS_PASSWORD=<SECURE VALUE>
+AUTO_UPDATES_LOCATION=
+SOFTWARE_UPDATES_PROXY_SERVER=
+SOFTWARE_UPDATES_PROXY_PORT=
+SOFTWARE_UPDATES_PROXY_USER=
+SOFTWARE_UPDATES_PROXY_PASSWORD=<SECURE VALUE>
+ORACLE_HOME=/u01/app/Oracle/Middleware
+FEDERATED_ORACLE_HOMES=
+INSTALL_TYPE=WebLogic Server
+==========================
+
+java home set command in .bash_profile
+
+export JAVA_HOME="path that you found"
+export PATH=$JAVA_HOME/bin:$PATH
+===========================
+java -jar fmw_12.2.1.4.0_infrastructure.jar -silent -responseFile /u01/softwares/wl12214.rsp -invPtrLoc /u01/softwares/oraInst.loc
+
+============================================
+if it is 14c install means then use below ressponse file format.
+14c ressponse file Model:
+wl14110.rsp:
+
+[ENGINE]
+Response File Version=1.0.0.0.0
+[GENERIC]
+ORACLE_HOME=/u01/oracle/ofsaa/Middleware/
+INSTALL_TYPE=Fusion Middleware Infrastructure
+MYORACLESUPPORT_USERNAME=
+MYORACLESUPPORT_PASSWORD=<SECURE VALUE>
+DECLINE_SECURITY_UPDATES=true
+SECURITY_UPDATES_VIA_MYORACLESUPPORT=false
+PROXY_HOST=
+PROXY_PORT=
+PROXY_USER=
+PROXY_PWD=<SECURE VALUE>
+COLLECTOR_SUPPORTHUB_URL=
+
+===================================================
+
+use below command to download softwares from server directly(java and 12c and other softwares).--if u have oracle support access.
+wget " link" -O Filename.zip
+
+
